@@ -1,0 +1,224 @@
+{
+  "schemas": [
+    {
+      "id": 1,
+      "fields": [
+        {
+          "id": 1,
+          "name": "device",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "long",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fields": [
+        {
+          "id": 1,
+          "name": "equipment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "long",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "quality",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 5,
+          "name": "score",
+          "type": "double",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "partition_specs": [
+    {
+      "id": 1,
+      "fields": [
+        {
+          "source_id": 3,
+          "transform": "day"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fields": []
+    },
+    {
+      "id": 3,
+      "fields": [
+        {
+          "source_id": 1,
+          "transform": "identity"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "fields": [
+        {
+          "source_id": 2,
+          "transform": "bucket[4]"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "id": "d1",
+      "kind": "data",
+      "uri": "lake://cs-d1",
+      "schema_id": 1,
+      "spec_id": 1,
+      "partition": [
+        "2026-11-08"
+      ],
+      "data_sequence": 2,
+      "file_sequence": 101,
+      "asset": {
+        "path": "d1.jsonl",
+        "bytes": 177,
+        "sha256": "4a7efe30d77e856bda2e766c7b4e57d6efbec74d481ae69022bb3a417a0f75e6",
+        "rows": 4
+      }
+    },
+    {
+      "id": "d2",
+      "kind": "data",
+      "uri": "lake://cs-d2",
+      "schema_id": 2,
+      "spec_id": 3,
+      "partition": [
+        "c"
+      ],
+      "data_sequence": 5,
+      "file_sequence": 102,
+      "asset": {
+        "path": "d2.jsonl",
+        "bytes": 106,
+        "sha256": "63897df79de712ad1ee28c4915b7bc3e276fda7bb939e0b0b922288c2aa7c7b6",
+        "rows": 2
+      }
+    },
+    {
+      "id": "d3",
+      "kind": "data",
+      "uri": "lake://cs-d3",
+      "schema_id": 2,
+      "spec_id": 2,
+      "partition": [],
+      "data_sequence": 6,
+      "file_sequence": 103,
+      "asset": {
+        "path": "d3.jsonl",
+        "bytes": 187,
+        "sha256": "31a118e529d010b8e2fb206875afdbfa73f7fe96d833278ca0cb20060c8cab15",
+        "rows": 3
+      }
+    },
+    {
+      "id": "eq-day",
+      "kind": "equality",
+      "schema_id": 1,
+      "spec_id": 1,
+      "partition": [
+        "2026-11-08"
+      ],
+      "data_sequence": 5,
+      "file_sequence": 90,
+      "asset": {
+        "path": "eq-day.jsonl",
+        "bytes": 21,
+        "sha256": "6fd2e1110ef1ddb784c31aaa4aa63d1e6e53ee2705ccd21c4cfb0747c7e7a942",
+        "rows": 2
+      },
+      "field_ids": [
+        1
+      ]
+    },
+    {
+      "id": "eq-bucket",
+      "kind": "equality",
+      "schema_id": 1,
+      "spec_id": 4,
+      "partition": [
+        3
+      ],
+      "data_sequence": 7,
+      "file_sequence": 105,
+      "asset": {
+        "path": "eq-bucket.jsonl",
+        "bytes": 17,
+        "sha256": "70dc71a1806185f7fb85ac7380d6d3b9736a21e796678bc66723b6af7469c3ff",
+        "rows": 2
+      },
+      "field_ids": [
+        2
+      ]
+    },
+    {
+      "id": "p-identity",
+      "kind": "position",
+      "schema_id": 1,
+      "spec_id": 3,
+      "partition": [
+        "c"
+      ],
+      "data_sequence": 6,
+      "file_sequence": 106,
+      "asset": {
+        "path": "p-identity.jsonl",
+        "bytes": 37,
+        "sha256": "ed576d368331ceb3f0181742d58e3dba1e6892199121b1f82e4dcfec38ad26ef",
+        "rows": 1
+      }
+    }
+  ],
+  "snapshot": {
+    "id": "cs-s1",
+    "schema_id": 2,
+    "file_ids": [
+      "d1",
+      "d2",
+      "d3",
+      "eq-day",
+      "eq-bucket",
+      "p-identity"
+    ]
+  },
+  "max_delete_keys": 10000,
+  "bucket_values": {
+    "7": 3,
+    "10": 2,
+    "30": 0
+  }
+}

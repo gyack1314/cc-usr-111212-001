@@ -1,0 +1,92 @@
+{
+  "schemas": [
+    {
+      "id": 1,
+      "fields": [
+        {
+          "id": 1,
+          "name": "device",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "long",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fields": [
+        {
+          "id": 1,
+          "name": "equipment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "double",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "quality",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "partition_specs": [
+    {
+      "id": 1,
+      "fields": []
+    },
+    {
+      "id": 2,
+      "fields": []
+    }
+  ],
+  "files": [
+    {
+      "id": "d1",
+      "kind": "data",
+      "uri": "lake://widen-d1",
+      "schema_id": 1,
+      "spec_id": 1,
+      "partition": [],
+      "data_sequence": 2,
+      "file_sequence": 201,
+      "asset": {
+        "path": "widen-d1.jsonl",
+        "bytes": 132,
+        "sha256": "a03684a606c4a58c255685b1bb5ce7049fdbe5f9df636848a6a42518aa468493",
+        "rows": 3
+      }
+    }
+  ],
+  "snapshot": {
+    "id": "w-s1",
+    "schema_id": 2,
+    "file_ids": [
+      "d1"
+    ]
+  },
+  "max_delete_keys": 10000
+}

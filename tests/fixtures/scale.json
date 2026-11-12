@@ -1,0 +1,149 @@
+{
+  "schemas": [
+    {
+      "id": 1,
+      "fields": [
+        {
+          "id": 1,
+          "name": "device",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "long",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fields": [
+        {
+          "id": 1,
+          "name": "equipment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "long",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "quality",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "partition_specs": [
+    {
+      "id": 1,
+      "fields": []
+    },
+    {
+      "id": 2,
+      "fields": []
+    }
+  ],
+  "files": [
+    {
+      "id": "d1",
+      "kind": "data",
+      "uri": "lake://scale-d1",
+      "schema_id": 1,
+      "spec_id": 1,
+      "partition": [],
+      "data_sequence": 2,
+      "file_sequence": 301,
+      "asset": {
+        "path": "scale-d1.jsonl",
+        "bytes": 103780,
+        "sha256": "0bfac138d39b8f4069a9ee3ea168c6197e254dfb498d4ed14f5c1219289ddee7",
+        "rows": 2000
+      }
+    },
+    {
+      "id": "e1",
+      "kind": "equality",
+      "schema_id": 1,
+      "spec_id": 2,
+      "partition": [],
+      "data_sequence": 5,
+      "file_sequence": 302,
+      "field_ids": [
+        1
+      ],
+      "asset": {
+        "path": "scale-eq.jsonl",
+        "bytes": 7945,
+        "sha256": "3187c5880f7951e299c25f59bc8e270d571e32580602fd7bbcbace0e930e5dc6",
+        "rows": 500
+      }
+    },
+    {
+      "id": "p1",
+      "kind": "position",
+      "schema_id": 1,
+      "spec_id": 2,
+      "partition": [],
+      "data_sequence": 2,
+      "file_sequence": 303,
+      "asset": {
+        "path": "scale-pos.jsonl",
+        "bytes": 20945,
+        "sha256": "0e61a274ad127111e3911c5d9faba5e2b10bb14a6fa9713c9daf2ca4661dba39",
+        "rows": 500
+      }
+    },
+    {
+      "id": "p2",
+      "kind": "position",
+      "schema_id": 1,
+      "spec_id": 2,
+      "partition": [],
+      "data_sequence": 2,
+      "file_sequence": 304,
+      "asset": {
+        "path": "scale-pos2.jsonl",
+        "bytes": 40,
+        "sha256": "dc9459cf2bb9ddb7c4c1c9f4638d840f1f10f429d4c52cc953f8cfdf83410182",
+        "rows": 1
+      }
+    }
+  ],
+  "snapshot": {
+    "id": "scale-s1",
+    "schema_id": 2,
+    "file_ids": [
+      "d1",
+      "e1",
+      "p1",
+      "p2"
+    ]
+  },
+  "max_delete_keys": 10000,
+  "scale": {
+    "rows": 2000,
+    "equality_keys": 500,
+    "position_deletes": 501,
+    "first_visible_position": 1000
+  }
+}
