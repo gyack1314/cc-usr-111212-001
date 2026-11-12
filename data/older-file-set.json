@@ -1,0 +1,150 @@
+{
+  "schemas": [
+    {
+      "id": 1,
+      "fields": [
+        {
+          "id": 1,
+          "name": "device",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "long",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fields": [
+        {
+          "id": 1,
+          "name": "equipment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "reading",
+          "type": "long",
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "quality",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "partition_specs": [
+    {
+      "id": 1,
+      "fields": [
+        {
+          "source_id": 3,
+          "transform": "day"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fields": []
+    }
+  ],
+  "files": [
+    {
+      "id": "d1",
+      "kind": "data",
+      "uri": "lake://readings-old",
+      "schema_id": 1,
+      "spec_id": 1,
+      "partition": [
+        "2026-11-08"
+      ],
+      "data_sequence": 2,
+      "file_sequence": 10,
+      "asset": {
+        "path": "readings-old.jsonl",
+        "bytes": 133,
+        "sha256": "09fe1276c66dc45669abc2f147acf888284a969a62398554cb72a5961b97b451",
+        "rows": 3
+      }
+    },
+    {
+      "id": "d2",
+      "kind": "data",
+      "uri": "lake://readings-new",
+      "schema_id": 2,
+      "spec_id": 2,
+      "partition": [],
+      "data_sequence": 5,
+      "file_sequence": 11,
+      "asset": {
+        "path": "readings-new.jsonl",
+        "bytes": 106,
+        "sha256": "f30e5e0521b02529cfbc0fb6f621d5e0c52ee9dd911613af2c13c74c183c62e9",
+        "rows": 2
+      }
+    },
+    {
+      "id": "e1",
+      "kind": "equality",
+      "field_ids": [
+        1
+      ],
+      "schema_id": 1,
+      "spec_id": 2,
+      "partition": [],
+      "data_sequence": 5,
+      "file_sequence": 12,
+      "asset": {
+        "path": "equality.jsonl",
+        "bytes": 21,
+        "sha256": "6fd2e1110ef1ddb784c31aaa4aa63d1e6e53ee2705ccd21c4cfb0747c7e7a942",
+        "rows": 2
+      }
+    },
+    {
+      "id": "p1",
+      "kind": "position",
+      "schema_id": 1,
+      "spec_id": 2,
+      "partition": [],
+      "data_sequence": 2,
+      "file_sequence": 13,
+      "asset": {
+        "path": "position.jsonl",
+        "bytes": 44,
+        "sha256": "6f1d59093bef7e6b5fc6c4d1b4b5843690d9fae90d0649cafca7606ed1682730",
+        "rows": 1
+      }
+    }
+  ],
+  "snapshot": {
+    "id": "s1",
+    "schema_id": 2,
+    "file_ids": [
+      "d1",
+      "e1",
+      "p1"
+    ]
+  },
+  "max_delete_keys": 10000
+}
